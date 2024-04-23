@@ -4,12 +4,13 @@ import schema from "./schema";
 
 export async function GET(request: NextRequest){
     const users = await prisma.user.findMany();
-    // console.log(users)
     if(!users){
         return NextResponse.json("No users found.")    
     }
     return NextResponse.json(users)
 }
+
+
 export async function POST(request: NextRequest){
     const body = await request.json();
     const validate = schema.safeParse(body)
